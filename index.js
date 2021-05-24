@@ -1,9 +1,12 @@
 const express = require("express");
-
-
+const cors = require('cors');
+const bodyParser = require('body-parser');
 const app = express();
 
 const users = ["Asad","Moin","Sabed","Sabana","Suhana"];
+
+app.use(cors());
+app.use(bodyParser.json());
 app.get('/',(req,res)=>{
     res.send("Hello I am working");
 })
@@ -16,6 +19,13 @@ app.get('/users/:id',(req,res)=>{
     res.send({id,name});
 })
 
-app.listen(4000,()=>{
-    console.log("listening to port 4000")
+app.post('/adduser',(req,res)=>{
+    const user = req.body
+    user.id= 55;
+    console.log("data recived",req.body);
+    res.send(user)
+})
+
+app.listen(3000,()=>{
+    console.log("listening to port 3000")
 })
